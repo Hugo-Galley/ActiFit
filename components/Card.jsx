@@ -20,10 +20,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     padding: 10,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#5B9DEA',
     borderRadius: 8,
     margin: 10,
-    marginBottom:30,
+    marginBottom:20,
   },
   image: {
     width: 100,
@@ -36,11 +36,12 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 14,
-    color: '#333',
+    color: '#fff',
   },
   exercises: {
     fontSize: 16,
     fontWeight: 'bold',
     marginTop: 5,
+    color:"#fff"
   },
 });

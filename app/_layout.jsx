@@ -5,8 +5,13 @@ import { Ionicons } from '@expo/vector-icons'
 
 const _layout = () => {
   return (
-    <Tabs>
-    <Tabs.Screen
+    <Tabs initialRouteName='index'
+    screenOptions={
+        {
+            headerShown:false
+        }
+    }>
+    <Tabs.Screen 
         name='exercice'
         options={{
             title: "Exercice",

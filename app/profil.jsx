@@ -1,31 +1,36 @@
 import { View, Text, Image, StyleSheet } from 'react-native';
 import React from 'react';
+import HeaderPage from '../components/Header';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 function Profil({ urlImg, name, size, weight, regime, frequency }) {
   return (
+    <SafeAreaView>
+            <HeaderPage page={"Profil"}/>
     <View style={styles.container}>
       <View style={styles.header}>
-      <Image source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/640px-Donald_Trump_official_portrait.jpg" }} style={styles.image} />
+      <Image source={require('../assets/SCR-20241007-olgt.jpeg')} style={styles.image} />
        <View style={styles.text}>
-            <Text>name</Text>
-            <Text>size cm</Text>
+            <Text>Mabrouk</Text>
+            <Text>122 cm</Text>
        </View>
       </View>
       <View style={styles.containerMain}>
         <View style={styles.items}>
           <Text>Poids actuel :</Text>
-          <Text>weight Kg</Text>
+          <Text>79 Kg</Text>
         </View>
         <View style={styles.items}>
           <Text>Objectif :</Text>
-          <Text>regime</Text>
+          <Text>Prendre du poids</Text>
         </View>
         <View style={styles.items}>
           <Text>Fréquence :</Text>
-          <Text>frequency fois/semaine</Text>
+          <Text>1 fois/semaine</Text>
         </View>
       </View>
     </View>
+    </SafeAreaView>
   );
 }
 
