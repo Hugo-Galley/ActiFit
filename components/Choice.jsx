@@ -1,50 +1,49 @@
 import React from 'react';
+import { SafeAreaView, View, Text, StyleSheet } from 'react-native'; // Assure-toi d'importer ces composants
+import HeaderPage from '../components/Header';
 
-const Choice = () => {
-  const handlePress = (buttonNumber) => {
-    console.log(`Button ${buttonNumber} pressed`);
-  };
+function Choice() {
+  function handlePress(buttonNumber) {
+  }
 
-  const creerButton = (buttonNumber, label) => {
+  function creerButton(buttonNumber, label) {
     return (
-      <button
-        key={buttonNumber}
-        style={styles.buttonActive}
-        onClick={() => handlePress(buttonNumber)}
-      >
-        {label}
-      </button>
+      <View key={buttonNumber}>
+        <button
+          style={styles.buttonActive}
+          onClick={() => handlePress(buttonNumber)}
+        >
+          {label}
+        </button>
+      </View>
     );
-  };
+  }
 
   return (
-    <div style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <HeaderPage page={"Accueil"} />
       {creerButton(1, 'Oui')}
       {creerButton(2, 'Non')}
       {creerButton(3, 'Peut-Être')}
       {creerButton(4, 'Je sais pas')}
-    </div>
+    </SafeAreaView>
   );
-};
+}
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
-    display: 'flex',
+    flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100vh',
   },
-
   buttonActive: {
     backgroundColor: '#5B9DEA',
-    borderRadius: '30px',
-    padding: '10px 20px',
-    transition: 'transform 0.2s ease',
-    transform: 'scale(0.95)',
-    margin: '10px',
-    color: '#FFFFFF'
-  }
-};
+    borderRadius: 30,
+    padding: 10,
+    margin: 10,
+    color: '#FFFFFF',
+  },
+});
 
 export default Choice;
