@@ -19,6 +19,20 @@ function Choice() {
     );
   }
 
+  function creerboutonSuivant() {
+    return (
+      <View key="suivant"
+      style={styles.boutonSuivant}
+      onClick={() => handlePress('suivant')}
+      >
+        Suivant
+      </View>
+    )
+
+  }
+
+
+
   return (
     <SafeAreaView style={styles.container}>
       <HeaderPage page={"Accueil"} />
@@ -44,6 +58,13 @@ const styles = StyleSheet.create({
     margin: 10,
     color: '#FFFFFF',
   },
+  boutonSuivant: {
+    backgroundColor: '#0059D7',
+    borderRadius: 30,
+    padding: 10,
+    margin: 10,
+    color: '#FFFFFF',
+  }
 });
 
 export default Choice;
