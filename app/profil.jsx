@@ -11,7 +11,7 @@ function Profil({ urlImg, name, size, weight, regime, frequency }) {
       <View style={styles.header}>
       <Image source={require('../assets/SCR-20241007-olgt.jpeg')} style={styles.image} />
        <View style={styles.text}>
-            <Text>Mabrouk</Text>
+            <Text style={styles.nom}>Mabrouk</Text>
             <Text>122 cm</Text>
        </View>
       </View>
@@ -38,10 +38,18 @@ export default Profil;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
+    margin: 20,
+    backgroundColor: "#E3E7E8",
     padding: 16,
-    borderRadius: 8,
-    
+    borderRadius: 20,
+    shadowColor: "#000", // Couleur de l'ombre
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,  // Opacité de l'ombre
+    shadowRadius: 6.65,  // Flou de l'ombre
+    elevation: 8,  // Pour Android
   },
   image: {
     width: 100, 
@@ -76,4 +84,9 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     color: '#fff', // Couleur du texte pour les éléments
   },
+  nom:{
+    fontWeight:'bold',
+    marginBottom:5,
+    fontSize: 20
+  }
 });

@@ -2,6 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { Tabs } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 
@@ -18,7 +19,7 @@ const _layout = () => {
         options={{
             title: "Exercice",
             tabBarIcon: ({color, size}) =>(
-                <Ionicons name='fitness' size={size} color={color} />
+             <Ionicons name='barbell' size={size} color={color} />
             )
 
         }}

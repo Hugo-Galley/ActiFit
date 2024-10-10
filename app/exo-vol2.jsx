@@ -28,7 +28,7 @@ function ChoiceExo() {
   return (
     <GestureHandlerRootView>
       <SafeAreaView>
-        <HeaderPage page={"Exercice"} />
+        <HeaderPage page={"Exercices"} />
         <ScrollView>
           <View style={styles.container}>
             {exos.map((exo, index) => (

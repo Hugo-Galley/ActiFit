@@ -6,37 +6,38 @@ import { useGlobalSearchParams } from 'expo-router';
 import * as SQLite from 'expo-sqlite';
 
 function DescriptionExo() {
-  const db = SQLite.openDatabaseSync('app.db'); 
-  const [exo, setExo] = useState(null); // Initialiser comme null pour gérer l'absence de données
+  const db = SQLite.openDatabaseSync('app.db');
+  const [exo, setExo] = useState(null);
   const { id } = useGlobalSearchParams();
 
   useEffect(() => {
     function fetchExo() {
       try {
-        // Récupérer l'exercice basé sur l'ID
         const result = db.getAllSync('SELECT * FROM Exercice WHERE idExercice = ?', [id]);
         if (result.length > 0) {
-          setExo(result[0]); 
+          setExo(result[0]);
         }
       } catch (error) {
         console.error('Erreur lors de la récupération des exercices:', error);
       }
     }
-
     fetchExo();
   }, [id]);
 
   return (
     <SafeAreaView>
-      <HeaderPage page={"Exercice"} />
+      <HeaderPage page={"Exercices"} />
       <View>
-          <Exo 
-            nom={exo.nom} 
-            urlImg={exo.urlImg} 
-            type={exo.muscleCible} // Exemple : vous pouvez passer muscleCible comme type
-            description={exo.description} 
+        {exo ? (
+          <Exo
+            nom={exo.nom}
+            urlImg={exo.urlImg}
+            type={exo.muscleCible}
+            description={exo.description}
           />
-
+        ) : (
+          <Text>Chargement de l'exercice...</Text>
+        )}
       </View>
     </SafeAreaView>
   );

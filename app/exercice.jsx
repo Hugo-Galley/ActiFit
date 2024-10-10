@@ -10,7 +10,7 @@ const Exercice = () => {
   return (
     <GestureHandlerRootView>
       <SafeAreaView>
-        <HeaderPage page={"Nos exercices"} />
+        <HeaderPage page={"Exercices"} />
         <ScrollView>
         <View style={styles.containerexo}>
   {[
@@ -28,7 +28,7 @@ const Exercice = () => {
     },
     {
       urlImg: "https://musculation-nutrition.fr/wp-content/uploads/2021/09/Les-biceps-curl.png",
-      text: "Avant-Bras",
+      text: "Avants-bras",
     },
     {
       urlImg: "https://cdn.shopify.com/s/files/1/0269/5551/3900/files/Standing-Behind-the-Neck-Barbell-Shoulder-Press_600x600.png?v=1619977648",
@@ -36,7 +36,7 @@ const Exercice = () => {
     },
     {
       urlImg: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGT5iMIQRVrrr_bPhuBF_gUcHDJugbi-k_Ol0PsKLapAA1arzcybi52FSpYWDOcgD20GM&usqp=CAU",
-      text: "Abdominaux",
+      text: "Abdos",
     },
     {
       urlImg: "https://static.wixstatic.com/media/23ac3b_1855a057e8bb49d0907fada55e43778a~mv2.png/v1/fill/w_428,h_413,al_c,lg_1,q_85/23ac3b_1855a057e8bb49d0907fada55e43778a~mv2.png",

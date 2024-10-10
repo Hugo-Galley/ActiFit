@@ -6,7 +6,7 @@ export default function Exo({ nom, urlImg, type, description }) {
     return (
         <View style={styles.container}>
             <View style={styles.textContainer}>
-                <Text style={styles.text}>{nom} à la {type}</Text>
+                <Text style={styles.text}>{nom}</Text>
             </View>
             <Image 
                 source={{ uri: urlImg }} 
