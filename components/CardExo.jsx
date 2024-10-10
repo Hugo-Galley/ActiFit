@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
-import { Link } from 'react-router-native';
 export default function CardExo({ nomExo, urlImg }) {
     return (
         <View style={styles.container}>

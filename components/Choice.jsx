@@ -1,9 +1,6 @@
 import React from 'react';
 
-const Choice = () => {
-  const handlePress = (buttonNumber) => {
-    console.log(`Button ${buttonNumber} pressed`);
-  };
+function Choice() {
 
   const creerButton = (buttonNumber, label) => {
     return (

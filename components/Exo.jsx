@@ -19,7 +19,6 @@ export default function Exo({ nom, urlImg, type, description }) {
         </View>
     );
 }
-// Application des styles au different composant
 const styles = StyleSheet.create({
     container: {
         padding: 25, 

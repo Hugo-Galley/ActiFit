@@ -3,6 +3,8 @@ import React from 'react'
 import { Tabs } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
 
+
+
 const _layout = () => {
   return (
     <Tabs initialRouteName='index'
@@ -20,6 +22,18 @@ const _layout = () => {
             )
 
         }}
+        />
+        <Tabs.Screen 
+        name='exo-vol2'
+        options={{
+            tabBarButton: () => null  
+        }}
+        />
+        <Tabs.Screen 
+            name='exo-vol3'
+            options={{
+                tabBarButton: () => null  
+            }}
         />
         <Tabs.Screen
         name='index'
