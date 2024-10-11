@@ -1,9 +1,10 @@
 import { View, SafeAreaView, Text } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import Exo from '../components/Exo';
-import HeaderPage from '../components/Header';
+import Exo from '../../components/Exo';
+import HeaderPage from '../../components/Header';
 import { useGlobalSearchParams } from 'expo-router';
 import * as SQLite from 'expo-sqlite';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 function DescriptionExo() {
   const db = SQLite.openDatabaseSync('app.db');
@@ -25,8 +26,9 @@ function DescriptionExo() {
   }, [id]);
 
   return (
+    <GestureHandlerRootView>
+            <HeaderPage page={"Exercices"} />
     <SafeAreaView>
-      <HeaderPage page={"Exercices"} />
       <View>
         {exo ? (
           <Exo
@@ -40,6 +42,7 @@ function DescriptionExo() {
         )}
       </View>
     </SafeAreaView>
+    </GestureHandlerRootView>
   );
 }
 

@@ -9,9 +9,9 @@ import initializeDatabase from '../components/DbSetup'
 function Home(){
   initializeDatabase()
     return (
-        <GestureHandlerRootView style={{ flex: 1 }}>
-            <SafeAreaView>
+        <GestureHandlerRootView >
             <HeaderPage page={"Accueil"} />
+            <SafeAreaView>
             <ScrollView>
               <View style={styles.container}>
                 <Text style={styles.text}>Découvrer vos Séances de la Semaine</Text>
@@ -44,7 +44,6 @@ const styles = StyleSheet.create(
     {
         container:{
             display:"flex",
-            marginTop:50
 
         },
         text:{

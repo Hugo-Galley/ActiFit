@@ -39,8 +39,8 @@ async function initializeDatabase () {
         );
     `);
 
-    const results = await db.execAsync('SELECT COUNT(*) as count FROM Exercice');
-const count = 0;
+    const result = await db.execAsync('SELECT COUNT(*) as count FROM Exercice');
+    const count = 3
 
 
     if (count === 0) {
@@ -90,13 +90,30 @@ const count = 0;
 ('Mollets debout', 'Jambes', 'https://www.docteur-fitness.com/wp-content/uploads/2021/10/extension-mollets-debout-machine.gif', 'Debout sur le bord d une marche, talons dans le vide, montez sur la pointe des pieds puis redescendez en contrôlant le mouvement.');
     `);
     }
-    else{
+    else if (count === 1 ){
         await db.execAsync(`
-            DELETE FROM exercice;
+            DELETE FROM Exercice;
+            DELETE FROM User;
         `);
     }
+    else if (count === 3){
+        try{
+             await db.execAsync(`
+                INSERT INTO User (nom, urlImgProfil)
+                VALUES ('Jean Dupont', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5BcRagvRHLJchv1u2PHDpYjmEwc84GGMmGA&s');
+    
+                INSERT INTO Statistique (taille, poids, frequence, objectif, idUser)
+                VALUES ('180 cm', '75 kg', 3, 'Stabiliser son poids', 1);
+    
+            `);
+            console.log("Tables créées avec succès.");
+        }
+        catch(error){
+            console.error("C'est la merd",error)
+        }
+    }
 
-    console.log("Tables créées avec succès.");
 };
+
 
 export default initializeDatabase;

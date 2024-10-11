@@ -9,8 +9,8 @@ import { Link } from 'expo-router'
 const Exercice = () => {
   return (
     <GestureHandlerRootView>
+              <HeaderPage page={"Exercices"} />
       <SafeAreaView>
-        <HeaderPage page={"Exercices"} />
         <ScrollView>
         <View style={styles.containerexo}>
   {[
@@ -43,7 +43,7 @@ const Exercice = () => {
       text: "Jambes",
     },
   ].map((muscle, index) => (
-        <Link key={index} href={`/exo-vol2?text=${encodeURIComponent(muscle.text)}`}>
+        <Link key={index} href={`./ExercicePage/exo-vol2?text=${encodeURIComponent(muscle.text)}`}>
           <MuscleChoice urlImg={muscle.urlImg} text={muscle.text} />
         </Link>
   ))}
@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
     padding: 5,
     flex: 1,
     alignItems: 'center',
-    marginTop: 20,
     marginLeft:20
   },
 

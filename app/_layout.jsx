@@ -24,18 +24,20 @@ const _layout = () => {
 
         }}
         />
-        <Tabs.Screen 
-        name='exo-vol2'
-        options={{
-            tabBarButton: () => null  
-        }}
-        />
-        <Tabs.Screen 
-            name='exo-vol3'
+
+                <Tabs.Screen 
+            name='ExercicePage/exo-vol2'
             options={{
                 tabBarButton: () => null  
             }}
         />
+        <Tabs.Screen 
+            name='ExercicePage/exo-vol3'
+            options={{
+                tabBarButton: () => null  
+            }}
+        />
+        
         <Tabs.Screen
         name='index'
         options={{

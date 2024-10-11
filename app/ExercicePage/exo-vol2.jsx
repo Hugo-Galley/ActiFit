@@ -2,12 +2,13 @@ import { View, Text, StyleSheet } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import HeaderPage from '../components/Header';
-import CardExo from '../components/CardExo';
+import HeaderPage from '../../components/Header';
+import CardExo from '../../components/CardExo';
 import { Link, useGlobalSearchParams } from 'expo-router';
 import * as SQLite from 'expo-sqlite';
 
 function ChoiceExo() {
+  let data = [];
   const db = SQLite.openDatabaseSync('app.db'); 
   const [exos, setExos] = useState([]);
   const { text } = useGlobalSearchParams();
@@ -27,12 +28,12 @@ function ChoiceExo() {
 
   return (
     <GestureHandlerRootView>
+              <HeaderPage page={"Exercices"} />
       <SafeAreaView>
-        <HeaderPage page={"Exercices"} />
         <ScrollView>
           <View style={styles.container}>
             {exos.map((exo, index) => (
-              <Link href={`/exo-vol3?id=${encodeURIComponent(exo.idExercice)}`} style={styles.gridItem} key={index}>
+              <Link href={`../ExercicePage/exo-vol3?id=${encodeURIComponent(exo.idExercice)}`} style={styles.gridItem} key={index}>
                 <CardExo nomExo={exo.nom} urlImg={exo.urlImg} />
               </Link>
             ))}
