@@ -15,7 +15,7 @@ const _layout = () => {
         }
     }>
     <Tabs.Screen 
-        name='exercice'
+        name='ExercicePage/exercice'
         options={{
             title: "Exercice",
             tabBarIcon: ({color, size}) =>(
@@ -37,7 +37,12 @@ const _layout = () => {
                 tabBarButton: () => null  
             }}
         />
-        
+                <Tabs.Screen 
+            name='seance'
+            options={{
+                tabBarButton: () => null  
+            }}
+        />
         <Tabs.Screen
         name='index'
         options={{

@@ -5,6 +5,7 @@ import HeaderPage from '../components/Header'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler';
 import initializeDatabase from '../components/DbSetup'
+import { Link } from 'expo-router'
 
 function Home(){
   initializeDatabase()
@@ -15,21 +16,27 @@ function Home(){
             <ScrollView>
               <View style={styles.container}>
                 <Text style={styles.text}>Découvrer vos Séances de la Semaine</Text>
+                <Link href={'./seance'} style={styles.card}>
                 <Card 
                   urlImg={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJqWCLZanWy09kTejVtnqM_Yumv9Do8KHYrg&s"} 
                   nbrExo={12} 
                   text={"Séance PUSH : Pec, Epaule Tritri"} 
                 />
+                </Link>
+                <Link href={'./seance'} style={styles.card}>
                 <Card 
                   urlImg={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJqWCLZanWy09kTejVtnqM_Yumv9Do8KHYrg&s"} 
                   nbrExo={12} 
                   text={"Séance PUSH : Pec, Epaule Tritri"} 
                 />
+                </Link>
+                <Link href={'./seance'} style={styles.card}>
                 <Card 
                   urlImg={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJqWCLZanWy09kTejVtnqM_Yumv9Do8KHYrg&s"} 
                   nbrExo={12} 
                   text={"Séance PUSH : Pec, Epaule Tritri"} 
                 />
+                </Link>
               </View>
               </ScrollView>
             </SafeAreaView>
@@ -40,20 +47,22 @@ function Home(){
 
 export default Home
 
-const styles = StyleSheet.create(
-    {
-        container:{
-            display:"flex",
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    alignItems: 'center', // Centre horizontalement
+    justifyContent: 'center', // Centre verticalement si nécessaire
+    paddingVertical: 20, // Pour ajouter de l'espace autour des cartes
+  },
+  text: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  card: {
 
-        },
-        text:{
-            fontSize:25,
-            margin: 'auto',
-            fontWeight:'bold',
-            textAlign:'center',
-            marginBottom:20
-            
-        }
-        }
-    
-)
+    width: '95%', 
+    marginVertical: 10, 
+  }
+});

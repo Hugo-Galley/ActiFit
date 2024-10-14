@@ -1,9 +1,9 @@
 import { StyleSheet, View, Text, Image } from 'react-native'
 import React from 'react'
-import HeaderPage from '../components/Header'
+import HeaderPage from '../../components/Header'
 import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import MuscleChoice from '../components/MuscleChoice'
+import MuscleChoice from '../../components/MuscleChoice'
 import { Link } from 'expo-router'
 
 const Exercice = () => {
@@ -43,7 +43,7 @@ const Exercice = () => {
       text: "Jambes",
     },
   ].map((muscle, index) => (
-        <Link key={index} href={`./ExercicePage/exo-vol2?text=${encodeURIComponent(muscle.text)}`}>
+        <Link key={index} href={`./exo-vol2?text=${encodeURIComponent(muscle.text)}`}>
           <MuscleChoice urlImg={muscle.urlImg} text={muscle.text} />
         </Link>
   ))}

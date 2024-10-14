@@ -16,32 +16,34 @@ export default function Card({ urlImg, nbrExo, text }) {
 
 const styles = StyleSheet.create({
   container: {
+    width: '100%', 
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'flex-start', 
     alignItems: 'center',
     padding: 10,
-    backgroundColor: '#5B9DEA',
+    backgroundColor: '#404041',
     borderRadius: 8,
-    margin: 10,
-    marginBottom:20,
+    marginBottom: 20,
+    alignSelf: 'center', 
   },
   image: {
     width: 100,
     height: 100,
     borderRadius: 8,
+    marginRight: 15, 
   },
   textContainer: {
-    flex: 1,
-    paddingLeft: 10,
+    flex: 1, 
   },
   description: {
     fontSize: 14,
     color: '#fff',
+    flexWrap: 'wrap', 
   },
   exercises: {
     fontSize: 16,
     fontWeight: 'bold',
     marginTop: 5,
-    color:"#fff"
+    color: '#fff',
   },
 });

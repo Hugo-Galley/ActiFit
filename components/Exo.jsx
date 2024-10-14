@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         padding: 25, 
     },
     textContainer: {
-        backgroundColor: '#5DADE2',  
+        backgroundColor: '#404041',  
         paddingVertical: 15,
         paddingHorizontal: 20,
         borderRadius: 20,

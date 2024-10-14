@@ -33,7 +33,7 @@ function ChoiceExo() {
         <ScrollView>
           <View style={styles.container}>
             {exos.map((exo, index) => (
-              <Link href={`../ExercicePage/exo-vol3?id=${encodeURIComponent(exo.idExercice)}`} style={styles.gridItem} key={index}>
+              <Link href={`./exo-vol3?id=${encodeURIComponent(exo.idExercice)}`} style={styles.gridItem} key={index}>
                 <CardExo nomExo={exo.nom} urlImg={exo.urlImg} />
               </Link>
             ))}
