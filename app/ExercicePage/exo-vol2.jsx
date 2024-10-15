@@ -8,7 +8,6 @@ import { Link, useGlobalSearchParams } from 'expo-router';
 import * as SQLite from 'expo-sqlite';
 
 function ChoiceExo() {
-  let data = [];
   const db = SQLite.openDatabaseSync('app.db'); 
   const [exos, setExos] = useState([]);
   const { text } = useGlobalSearchParams();

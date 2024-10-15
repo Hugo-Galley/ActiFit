@@ -18,7 +18,7 @@ export default function MuscleChoice({ urlImg, text }) {
       textAlign: 'center',
       alignItems: 'center',
       padding: 10,
-      backgroundColor: '#404041',
+      backgroundColor: '#329df3',
       borderRadius: 15,
       margin: 11,
       marginBottom:20,

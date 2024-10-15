@@ -12,8 +12,8 @@ async function initializeDatabase () {
 
         CREATE TABLE IF NOT EXISTS Statistique (
             idStatistique INTEGER PRIMARY KEY,
-            taille VARCHAR(255), 
-            poids VARCHAR(255),   
+            taille INT, 
+            poids INT,   
             frequence INT,
             objectif TEXT CHECK(objectif IN ('Prendre du poids', 'Stabiliser son poids', 'Perdre du poids')),
             idUser INTEGER,
@@ -40,7 +40,7 @@ async function initializeDatabase () {
     `);
 
     const result = await db.execAsync('SELECT COUNT(*) as count FROM Exercice');
-    const count = 3
+    const count = 12
 
 
     if (count === 0) {
@@ -94,6 +94,7 @@ async function initializeDatabase () {
         await db.execAsync(`
             DELETE FROM Exercice;
             DELETE FROM User;
+            DELETE FROM Statistique;
         `);
     }
     else if (count === 3){
@@ -102,14 +103,14 @@ async function initializeDatabase () {
                 INSERT INTO User (nom, urlImgProfil)
                 VALUES ('Jean Dupont', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5BcRagvRHLJchv1u2PHDpYjmEwc84GGMmGA&s');
     
-                INSERT INTO Statistique (taille, poids, frequence, objectif, idUser)
-                VALUES ('180 cm', '75 kg', 3, 'Stabiliser son poids', 1);
+                INSERT INTO Statistique (taille, poids, frequence, objectif)
+                VALUES (180, 75, 3, 'Perdre du poids');
     
             `);
             console.log("Tables créées avec succès.");
         }
         catch(error){
-            console.error("C'est la merd",error)
+            console.error("Erreur",error)
         }
     }
 

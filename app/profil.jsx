@@ -3,21 +3,50 @@ import React, { useState, useEffect } from 'react';
 import HeaderPage from '../components/Header';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LineChart } from 'react-native-chart-kit';
-import * as SQLite from 'expo-sqlite';
+import * as SQLite from 'expo-sqlite/next';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 function Profil({ urlImg, name, size,weight, regime, frequency }) {
+    const db = SQLite.openDatabaseSync('app.db'); 
+    const [stat, setStat] = useState([]);
+    const [user, setUser] = useState([]);
+
+    const listStat= [];
+    const listUser= [];
+  
+    useEffect(() => {
+      function fetchExos() {
+        try {
+          const result = db.getAllSync('SELECT * FROM Statistique',);
+          const resultUser = db.getAllSync('SELECT * FROM User',);
+          setStat(result); 
+          setUser(resultUser);
+        } catch (error) {
+          console.error('Erreur lors de la récupération des exercices:', error);
+        }
+      }
+  
+      fetchExos();
+    }, []);
+  {stat.map((stats, index) => (
+        listStat.push(stats.poids,stats.objectif,stats.taille, stats.frequence)
+        
+))}
+{user.map((users, index) => (
+  listUser.push(users.nom,user.urlImgProfil)
+  
+))}
+
 
   let data = []
-  let poids = 75
-  let regimee = "Perte de poids"
-  if (poids) {
-    if (regimee === "Perte de poids") {
-      data = [poids, poids - 4, poids - 8, poids - 10, poids - 13, poids - 21, poids - 24, poids - 29];
-    } else if (regimee === "Prendre du poids") {
-      data = [poids, poids + 4, poids + 8, poids + 10, poids + 13, poids + 21, poids + 24, poids + 29];
+  console.log(listUser[1])
+  if (listStat[0]) {
+    if (listStat[1] === "Perdre du poids") {
+      data = [listStat[0], listStat[0] - 4, listStat[0] - 8, listStat[0] - 10, listStat[0] - 13, listStat[0] - 21, listStat[0] - 24, listStat[0] - 29];
+    } else if (listStat[1] === "Prendre du poids]") {
+      data = [listStat[0], listStat[0] + 4, listStat[0] + 8, listStat[0] + 10, listStat[0] + 13, listStat[0] + 21, listStat[0] + 24, listStat[0] + 29];
     } else {
-      data = [poids, poids - 1, poids + 2, poids - 1, poids + 2, poids - 1, poids + 1, poids - 2];
+      data = [listStat[0], listStat[0] - 1, listStat[0] + 2, listStat[0] - 1, listStat[0] + 2, listStat[0] - 1, listStat[0] + 1, listStat[0] - 2];
     }
   }
   return (
@@ -27,25 +56,25 @@ function Profil({ urlImg, name, size,weight, regime, frequency }) {
     <SafeAreaView>
             <View style={styles.container}>
         <View style={styles.header}>
-          <Image source={require('../assets/SCR-20241007-olgt.jpeg')} style={styles.image} />
+        <Image source={{ uri: listUser[1] }} style={styles.image} />
           <View style={styles.text}>
-            <Text style={styles.nom}>user.nom</Text>
-            <Text>stat.taille cm</Text>
+            <Text style={styles.nom}>{listUser[0]}</Text>
+            <Text>{listStat[2]} cm</Text>
           </View>
         </View>
 
         <View style={styles.containerMain}>
           <View style={styles.items}>
             <Text>Poids actuel :</Text>
-            <Text>poids Kg</Text>
+            <Text>{listStat[0]} Kg</Text>
           </View>
           <View style={styles.items}>
             <Text>Objectif :</Text>
-            <Text>stat.objectif</Text>
+            <Text>{listStat[1]}</Text>
           </View>
           <View style={styles.items}>
             <Text>Fréquence :</Text>
-            <Text>stat.frequence fois/semaine</Text>
+            <Text>{listStat[3]} fois/semaine</Text>
           </View>
         </View>
       </View>

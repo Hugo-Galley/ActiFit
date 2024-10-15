@@ -11,7 +11,7 @@ export default function CardExo({ nomExo, urlImg }) {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#404041",
+        backgroundColor: "#329df3",
         borderRadius: 10,
         padding: 10,
         alignItems: "center",
