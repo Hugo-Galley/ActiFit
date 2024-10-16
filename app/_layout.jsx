@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import { Tabs } from 'expo-router'
+import { router, Tabs } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 const _layout = () => {
   return (
-    <Tabs initialRouteName='index'
+    <Tabs initialRouteName='SignIn'
     screenOptions={
         {
             headerShown:false
@@ -32,19 +32,47 @@ const _layout = () => {
             }}
         />
         <Tabs.Screen 
+            name='inscription/inscription-1'
+            options={{
+                tabBarButton: () => null,
+                tabBarStyle: {display:'none'} 
+            }}
+        />
+        <Tabs.Screen 
+            name='inscription/SignUp'
+            options={{
+                tabBarButton: () => null,
+                tabBarStyle: {display:'none'}
+            }}
+        />
+        <Tabs.Screen 
+            name='SignIn'
+            options={{
+                tabBarButton: () => null,  
+                tabBarStyle: {display:'none'}
+            }}
+        />
+        <Tabs.Screen 
+            name='inscription/inscription-2'
+            options={{
+                tabBarButton: () => null,
+                tabBarStyle: {display:'none'}
+            }}
+        />
+        <Tabs.Screen 
             name='ExercicePage/exo-vol3'
             options={{
                 tabBarButton: () => null  
             }}
         />
                 <Tabs.Screen 
-            name='seance'
+            name='main/seance'
             options={{
                 tabBarButton: () => null  
             }}
         />
         <Tabs.Screen
-        name='index'
+        name='main/index'
         options={{
             title: "Home",
             tabBarIcon: ({color, size}) =>(
@@ -54,7 +82,7 @@ const _layout = () => {
         }}
         />
         <Tabs.Screen
-        name='profil'
+        name='main/profil'
         options={{
             title: "Profile",
             tabBarIcon: ({color, size}) =>(

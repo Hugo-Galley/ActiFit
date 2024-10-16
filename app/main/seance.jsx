@@ -1,7 +1,7 @@
 import { View, Text, ScrollView, SafeAreaView, Image, StyleSheet } from 'react-native'
 import React from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import HeaderPage from '../components/Header'
+import HeaderPage from '../../components/Header'
 import { Ionicons } from '@expo/vector-icons'
 
 function seance(){
@@ -9,7 +9,7 @@ function seance(){
 <GestureHandlerRootView>
     <HeaderPage page={"Exercice"}/>
     <View>
-        <Image source={require('../assets/essan.webp')} style={styles.image}/>
+        <Image source={require('../../assets/essan.webp')} style={styles.image}/>
             <View style={styles.container} > 
                 <View style={styles.pictoContainer}>
                     <View style={styles.infoItems}>

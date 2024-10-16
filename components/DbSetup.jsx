@@ -7,7 +7,9 @@ async function initializeDatabase () {
         CREATE TABLE IF NOT EXISTS User (
             idUser INTEGER PRIMARY KEY,
             nom VARCHAR(100) NOT NULL,
-            urlImgProfil TEXT NOT NULL
+            urlImgProfil TEXT NOT NULL,
+            email TEXT NOT NULL,
+            mdp TEXT NOT NULL,
         );
 
         CREATE TABLE IF NOT EXISTS Statistique (
