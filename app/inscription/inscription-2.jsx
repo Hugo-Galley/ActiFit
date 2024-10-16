@@ -12,13 +12,13 @@ function inscription2(){
         <SafeAreaView style={styles.contenu}>
           <Text style={styles.text}>Combien de fois par semaine souhaiter vous vous entrainer</Text>
           <View style={styles.container}>
-            <Link href={'/main'} style={styles.lien}>
+            <Link href={'/main/home'} style={styles.lien}>
               <Choice titre={"1 fois/semaine"} />
             </Link>
-            <Link href={'/main'} style={styles.lien}>
+            <Link href={'/main/home'} style={styles.lien}>
             <Choice titre={"3 fois/semaine"} />
             </Link>
-            <Link href={'/main'} style={styles.lien}>
+            <Link href={'/main/home'} style={styles.lien}>
             <Choice titre={"5 fois/semaine"} />
             </Link>
 

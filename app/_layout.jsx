@@ -1,14 +1,11 @@
-import { View, Text } from 'react-native'
 import React from 'react'
 import { router, Tabs } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
-import Icon from 'react-native-vector-icons/FontAwesome';
-
 
 
 const _layout = () => {
   return (
-    <Tabs initialRouteName='SignIn'
+    <Tabs initialRouteName='index'
     screenOptions={
         {
             headerShown:false
@@ -46,7 +43,7 @@ const _layout = () => {
             }}
         />
         <Tabs.Screen 
-            name='SignIn'
+            name='index'
             options={{
                 tabBarButton: () => null,  
                 tabBarStyle: {display:'none'}
@@ -72,7 +69,7 @@ const _layout = () => {
             }}
         />
         <Tabs.Screen
-        name='main/index'
+        name='main/home'
         options={{
             title: "Home",
             tabBarIcon: ({color, size}) =>(
