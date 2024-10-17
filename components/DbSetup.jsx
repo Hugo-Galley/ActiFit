@@ -1,53 +1,58 @@
-import * as SQLite from 'expo-sqlite';
+import { openDatabaseAsync } from 'expo-sqlite/next';
 
-async function initializeDatabase () {
-    const db = await SQLite.openDatabaseAsync('app.db');
-    await db.execAsync(`
-        
-        CREATE TABLE IF NOT EXISTS User (
-            idUser INTEGER PRIMARY KEY,
-            nom VARCHAR(100) NOT NULL,
-            urlImgProfil TEXT NOT NULL,
-            email TEXT NOT NULL,
-            mdp TEXT NOT NULL,
-        );
+async function initializeDatabase() {
+    try {
+        const db = await openDatabaseAsync('app.db');
 
-        CREATE TABLE IF NOT EXISTS Statistique (
-            idStatistique INTEGER PRIMARY KEY,
-            taille INT, 
-            poids INT,   
-            frequence INT,
-            objectif TEXT CHECK(objectif IN ('Prendre du poids', 'Stabiliser son poids', 'Perdre du poids')),
-            idUser INTEGER,
-            FOREIGN KEY (idUser) REFERENCES User(idUser)
-        );
+        await db.runAsync(`
+            CREATE TABLE IF NOT EXISTS User (
+                idUser INTEGER PRIMARY KEY AUTOINCREMENT,
+                nom VARCHAR(100) NOT NULL,
+                urlImgProfil TEXT NOT NULL,
+                email TEXT NOT NULL,
+                mdp TEXT NOT NULL
+            );
+        `);
+        await db.runAsync(`
+            CREATE TABLE IF NOT EXISTS Statistique (
+                idStatistique INTEGER PRIMARY KEY AUTOINCREMENT,
+                taille INT,
+                poids INT,
+                frequence INT,
+                objectif TEXT CHECK(objectif IN ('Prendre du poids', 'Stabiliser son poids', 'Perdre du poids')),
+                idUser INTEGER,
+                FOREIGN KEY (idUser) REFERENCES User(idUser)
+            );
+        `);
 
-        CREATE TABLE IF NOT EXISTS Seance (
-            idSeance INTEGER PRIMARY KEY,
-            urlImgBanniere TEXT,
-            nbrExo INT,
-            description TEXT,
-            nom VARCHAR(200)
-        );
+        await db.runAsync(`
+            CREATE TABLE IF NOT EXISTS Seance (
+                idSeance INTEGER PRIMARY KEY AUTOINCREMENT,
+                urlImgBanniere TEXT,
+                nbrExo INT,
+                description TEXT,
+                nom VARCHAR(200)
+            );
+        `);
 
-        CREATE TABLE IF NOT EXISTS Exercice (
-            idExercice INTEGER PRIMARY KEY,
-            nom VARCHAR(100),
-            muscleCible VARCHAR(50),
-            urlImg TEXT,
-            idSeance INT,
-            description TEXT,
-            FOREIGN KEY (idSeance) REFERENCES Seance(idSeance)
-        );
-    `);
+        await db.runAsync(`
+            CREATE TABLE IF NOT EXISTS Exercice (
+                idExercice INTEGER PRIMARY KEY AUTOINCREMENT,
+                nom VARCHAR(100),
+                muscleCible VARCHAR(50),
+                urlImg TEXT,
+                idSeance INT,
+                description TEXT,
+                FOREIGN KEY (idSeance) REFERENCES Seance(idSeance)
+            );
+        `);
 
-    const result = await db.execAsync('SELECT COUNT(*) as count FROM Exercice');
-    const count = 12
+        const result = await db.runAsync('SELECT COUNT(*) as count FROM Exercice');
+        const count = 20
 
-
-    if (count === 0) {
-    await db.execAsync(`
-        INSERT INTO Exercice (nom, muscleCible, urlImg, description) VALUES
+        if (count === 0) {
+                    await db.runAsync(`
+INSERT INTO Exercice (nom, muscleCible, urlImg, description) VALUES
 ('Développé couché', 'Pectoraux', 'https://i0.wp.com/muscu-street-et-crossfit.fr/wp-content/uploads/2021/09/Muscles-DC.001.jpeg?resize=1024%2C576&ssl=1', 'Allongez-vous sur un banc, saisissez la barre avec une prise légèrement plus large que les épaules. Abaissez la barre vers la poitrine, puis poussez pour remonter en extension complète des bras.'),
 ('Pompes', 'Pectoraux', 'https://www.docteur-fitness.com/wp-content/uploads/2020/10/pompe-musculation.gif', 'En position de planche, mains un peu plus écartées que les épaules, abaissez votre corps en fléchissant les coudes, puis poussez pour remonter. Gardez le corps droit tout au long du mouvement.'),
 ('Écarté couché', 'Pectoraux', 'https://pouruneviesaine.com/wp-content/uploads/2016/09/ecartécouché.jpg', 'Allongé sur un banc, tenez un haltère dans chaque main au-dessus de la poitrine. Abaissez les bras sur les côtés en gardant un léger pli aux coudes, puis remontez en serrant la poitrine.'),
@@ -90,33 +95,24 @@ async function initializeDatabase () {
 ('Leg curl', 'Jambes', 'https://www.body-burn.com/wp-content/uploads/2023/08/leg-curl-allonge-cuisses-ischios-exercice.webp', 'Allongé sur la machine, fléchissez les jambes pour amener vos talons vers vos fesses, puis étendez lentement.'),
 ('Soulevé de terre', 'Jambes', 'https://www.dravelnutrition.fr/img/cms/BLOG/exercice-souleve-de-terre.jpg', 'Debout devant une barre, fléchissez les genoux et les hanches pour saisir la barre. Redressez-vous en gardant le dos droit.'),
 ('Mollets debout', 'Jambes', 'https://www.docteur-fitness.com/wp-content/uploads/2021/10/extension-mollets-debout-machine.gif', 'Debout sur le bord d une marche, talons dans le vide, montez sur la pointe des pieds puis redescendez en contrôlant le mouvement.');
-    `);
-    }
-    else if (count === 1 ){
-        await db.execAsync(`
-            DELETE FROM Exercice;
-            DELETE FROM User;
-            DELETE FROM Statistique;
+            );
         `);
-    }
-    else if (count === 3){
-        try{
-             await db.execAsync(`
-                INSERT INTO User (nom, urlImgProfil)
-                VALUES ('Jean Dupont', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5BcRagvRHLJchv1u2PHDpYjmEwc84GGMmGA&s');
-    
-                INSERT INTO Statistique (taille, poids, frequence, objectif)
-                VALUES (180, 75, 3, 'Perdre du poids');
-    
+        }
+        else if (count == 2){
+            await db.runAsync(`
+                INSERT INTO User (nom, urlImgProfil, email, mdp)
+                VALUES ('Donald Trump', 'https://t0.gstatic.com/licensed-image?q=tbn:ANd9GcQ6XYjVFQk6v975w9Rj2MGvgpUg4O_0bo1Hw9GPqqHq-SukR4SBhukr0aTc6Tdieny3', 'jean.dupont@example.com', 'password123');
+                );
             `);
-            console.log("Tables créées avec succès.");
+            await db.runAsync(`
+            INSERT INTO Statistique (taille, poids, frequence, objectif, idUser)
+            VALUES (180, 75, 3, 'Stabiliser son poids', 1);
+            `);
+
         }
-        catch(error){
-            console.error("Erreur",error)
-        }
+
+    } catch (error) {
+        console.error("Erreur lors de l'initialisation de la base de données :", error);
     }
-
-};
-
-
-export default initializeDatabase;
+}
+export default initializeDatabase

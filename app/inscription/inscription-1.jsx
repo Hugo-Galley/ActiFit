@@ -1,26 +1,42 @@
-import { View, Text, SafeAreaView, StyleSheet } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Choice from '../../components/Choice'
 import HeaderPage from '../../components/Header'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import { Link } from 'expo-router'
+import { Link, useGlobalSearchParams, useRouter } from 'expo-router'
 
 function inscription1(){
+  const { taille } = useGlobalSearchParams();
+  const { poids } = useGlobalSearchParams();
+  const { email } = useGlobalSearchParams();
+  const router = useRouter();
+
+  function SendStat(choice){
+    router.push({
+      pathname: './inscription-2',
+      params: { taille: taille,
+                poids: poids,
+                objectif: choice,
+                email: email
+              }, 
+  });
+  }
+
   return (
     <GestureHandlerRootView>
       <HeaderPage page={"Inscription"}/>
         <SafeAreaView style={styles.contenu}>
           <Text style={styles.text}>Quelle est votre Objectif ?</Text>
           <View style={styles.container}>
-            <Link href={'inscription/inscription-2'} style={styles.lien}>
-              <Choice titre={"Perdre du poids"}/>
-            </Link>
-            <Link href={'inscription/inscription-2'} style={styles.lien}>
-              <Choice titre={"Stabiliser mon poids"}/>
-            </Link>
-            <Link href={'inscription/inscription-2'} style={styles.lien}>
-              <Choice titre={"Prendre du poids"}/>
-            </Link>
+          <TouchableOpacity onPress={() => SendStat("Perdre du poids")} style={styles.lien}>
+            <Choice titre={"Perdre du poids"} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => SendStat("Stabiliser son poids")} style={styles.lien}>
+            <Choice titre={"Stabiliser mon poids"} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => SendStat("Prendre du poids")} style={styles.lien}>
+            <Choice titre={"Prendre du poids"} />
+          </TouchableOpacity>
 
           </View>
         

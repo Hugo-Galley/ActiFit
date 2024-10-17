@@ -1,12 +1,51 @@
 import { View, Text, TextInput, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native'
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import HeaderPage from '../components/Header';
-import { Link } from 'expo-router';
-
+import initializeDatabase from '../components/DbSetup';
+import { Link, useRouter } from 'expo-router';
+import * as SQLite from 'expo-sqlite';
+import { useUser } from './UserContext';
 function SignIn (){
     const [email,onChangeEmail] = useState('');
     const [mdp,onChangeMdp] = useState('');
+    const { setUserId } = useUser();
+    const router = useRouter(); // Utilisation du hook `useRouter`
+    initializeDatabase()
+    const db = SQLite.openDatabaseSync('app.db'); 
+    const [user, setUser] = useState([]);
+  
+    useEffect(() => {
+      function fetchUser() {
+        try {
+          const result = db.getAllSync('SELECT * FROM User');
+          setUser(result); 
+        } catch (error) {
+          console.error('Erreur lors de la récupération des exercices:', error);
+        }
+      }
+  
+      fetchUser();
+    }, []);
+
+    function verifyConnection() {
+
+    
+        let isFound = false;
+    
+        user.forEach((users) => {
+            if (users.email === email && users.mdp === mdp) {
+                setUserId(users.idUser)
+                router.push('/main/home');
+                isFound = true;
+            }
+        });
+    
+        if (!isFound) {
+            alert('Email ou mot de passe incorrect');
+        }
+    }
+    
 
   return (
     <GestureHandlerRootView>
@@ -29,11 +68,13 @@ function SignIn (){
       />
       
         </View>
+        <TouchableOpacity onPress={verifyConnection}>
         <View style={styles.buttonCon}>
                 <Text style={styles.btnText}>Se Connecter</Text>
             </View>
+            </TouchableOpacity>
         <Text style={styles.subtitle}>Pas de compte ?</Text>
-        <Link href={'./inscription/SignUp'}>
+        <Link href={'/inscription/SignUp'}>
             <View style={styles.button}>
                 <Text style={styles.btnText}>S'incrire</Text>
             </View>

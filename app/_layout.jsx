@@ -1,10 +1,13 @@
 import React from 'react'
-import { router, Tabs } from 'expo-router'
+import {Tabs } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
+import { UserProvider } from './UserContext'
+
 
 
 const _layout = () => {
   return (
+    <UserProvider>
     <Tabs initialRouteName='index'
     screenOptions={
         {
@@ -89,6 +92,7 @@ const _layout = () => {
         }}
         />
     </Tabs>
+    </UserProvider>
   )
 }
 

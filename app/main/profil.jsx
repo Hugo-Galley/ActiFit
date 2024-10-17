@@ -5,21 +5,24 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { LineChart } from 'react-native-chart-kit';
 import * as SQLite from 'expo-sqlite/next';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useUser } from '../UserContext';
 
-function Profil({ urlImg, name, size, weight, regime, frequency }) {
+function Profil() {
+    const { userId } = useUser();
     const db = SQLite.openDatabaseSync('app.db'); 
     const [stat, setStat] = useState([]);
     const [user, setUser] = useState([]);
+    // const id = 2;
 
     useEffect(() => {
         function fetchExos() {
             try {
-                const result = db.getAllSync('SELECT * FROM Statistique');
-                const resultUser = db.getAllSync('SELECT * FROM User');
+                const result = db.getAllSync('SELECT * FROM Statistique WHERE idUser = ?',userId);
+                const resultUser = db.getAllSync('SELECT * FROM User WHERE idUser = ?',userId);
                 setStat(result); 
                 setUser(resultUser);
             } catch (error) {
-                console.error('Erreur lors de la récupération des exercices:', error);
+                console.error('Erreur lors de la récupération des Informations:', error);
             }
         }
 
@@ -30,7 +33,7 @@ function Profil({ urlImg, name, size, weight, regime, frequency }) {
     const listStat = stat.length > 0 ? [stat[0].poids, stat[0].objectif, stat[0].taille, stat[0].frequence] : [];
     const listUser = user.length > 0 && user[0].urlImgProfil ? [user[0].nom, user[0].urlImgProfil] : ["Utilisateur", null];
 
-    // Génération des données de prévision en fonction de l'objectif
+
     let data = [];
     if (listStat[0] && !isNaN(listStat[0])) {
         if (listStat[1] === "Perdre du poids") {

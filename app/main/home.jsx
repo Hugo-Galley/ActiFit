@@ -1,14 +1,13 @@
 import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import Card from '../../components/Card'
 import HeaderPage from '../../components/Header'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler';
-import initializeDatabase from '../../components/DbSetup'
-import { Link } from 'expo-router'
+import { Link, useGlobalSearchParams } from 'expo-router'
 
 function Home(){
-  initializeDatabase()
+  
     return (
         <GestureHandlerRootView >
             <HeaderPage page={"Accueil"} />

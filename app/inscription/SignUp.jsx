@@ -4,12 +4,14 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import HeaderPage from '../../components/Header'
 import { Picker } from '@react-native-picker/picker';
 import Choice from '../../components/Choice';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
+import * as SQLite from 'expo-sqlite/next';
 
 function SignUp() {
   const [email, onChangeEmail] = useState('');
   const [mdp, onChangeMdp] = useState('');
   const [nom, onChangeNom] = useState('');
+  const router = useRouter()
   const poidsOptions = [];
   const tailleOptions = [];
   const [selectedWeight, setSelectedWeight] = useState(30);
@@ -22,6 +24,24 @@ function SignUp() {
     }
    for (let i = 110; i <= 220; i++) {
     tailleOptions.push(i);
+    }
+
+    function RegisterUser(){
+      const db = SQLite.openDatabaseSync('app.db'); 
+      db.runSync(`
+        INSERT INTO User (nom, urlImgProfil, email, mdp)
+                VALUES (?, 'https://t0.gstatic.com/licensed-image?q=tbn:ANd9GcQ6XYjVFQk6v975w9Rj2MGvgpUg4O_0bo1Hw9GPqqHq-SukR4SBhukr0aTc6Tdieny3', ?, ?);
+                );
+        );
+    `,nom,email,mdp);
+    router.push({
+      pathname: './inscription-1',
+      params: { taille: selectedHeight,
+                poids: selectedWeight,
+                email:email
+              }, 
+  });
+
     }
 
   return (
@@ -92,11 +112,11 @@ function SignUp() {
             </View>
           </Modal>
         </View>
-        <Link href={'./inscription-1'}>
+        <TouchableOpacity onPress={RegisterUser}>
         <View style={styles.button}>
                 <Text style={styles.btntext}>Suivant</Text>
         </View>
-        </Link>
+        </TouchableOpacity>
       </SafeAreaView>
     </GestureHandlerRootView>
   )
