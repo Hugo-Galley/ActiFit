@@ -6,12 +6,12 @@ import initializeDatabase from '../components/DbSetup';
 import { Link, useRouter } from 'expo-router';
 import * as SQLite from 'expo-sqlite';
 import { useUser } from './UserContext';
+initializeDatabase()
 function SignIn (){
     const [email,onChangeEmail] = useState('');
     const [mdp,onChangeMdp] = useState('');
     const { setUserId } = useUser();
     const router = useRouter(); // Utilisation du hook `useRouter`
-    initializeDatabase()
     const db = SQLite.openDatabaseSync('app.db'); 
     const [user, setUser] = useState([]);
   
