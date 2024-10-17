@@ -1,16 +1,17 @@
-import { View, Text, SafeAreaView, TextInput, StyleSheet, TouchableOpacity, Modal,} from 'react-native'
+import { View, Text, SafeAreaView, TextInput, StyleSheet, TouchableOpacity, Modal, Button, Platform,Image} from 'react-native'
 import React, { useState } from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import HeaderPage from '../../components/Header'
 import { Picker } from '@react-native-picker/picker';
-import Choice from '../../components/Choice';
 import { Link, useRouter } from 'expo-router';
 import * as SQLite from 'expo-sqlite/next';
+import * as ImagePicker from 'expo-image-picker';
 
 function SignUp() {
   const [email, onChangeEmail] = useState('');
   const [mdp, onChangeMdp] = useState('');
   const [nom, onChangeNom] = useState('');
+  const [imageUri, setImageUri] = useState(null);
   const router = useRouter()
   const poidsOptions = [];
   const tailleOptions = [];
@@ -30,10 +31,10 @@ function SignUp() {
       const db = SQLite.openDatabaseSync('app.db'); 
       db.runSync(`
         INSERT INTO User (nom, urlImgProfil, email, mdp)
-                VALUES (?, 'https://t0.gstatic.com/licensed-image?q=tbn:ANd9GcQ6XYjVFQk6v975w9Rj2MGvgpUg4O_0bo1Hw9GPqqHq-SukR4SBhukr0aTc6Tdieny3', ?, ?);
+                VALUES (?, ?, ?, ?);
                 );
         );
-    `,nom,email,mdp);
+    `,nom,imageUri,email,mdp);
     router.push({
       pathname: './inscription-1',
       params: { taille: selectedHeight,
@@ -42,8 +43,31 @@ function SignUp() {
               }, 
   });
 
+
     }
 
+    const pickImage = async () => {
+      // Demande de permission d'accès à la galerie
+      if (Platform.OS !== 'web') {
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+          alert('Désolé, nous avons besoin de la permission pour accéder à la bibliothèque de photos !');
+          return;
+        }
+      }
+  
+      // Ouvrir la bibliothèque d'images
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        quality: 1,
+      });
+  
+  
+      if (!result.canceled) {
+        setImageUri(result.assets[0].uri);
+      }
+    };
   return (
     <GestureHandlerRootView>
       <HeaderPage page={'Inscription'}/>
@@ -77,6 +101,13 @@ function SignUp() {
           <TouchableOpacity onPress={() => setShowHeightPicker(true)} style={styles.pickerButton}>
             <Text>{selectedHeight} cm</Text>
           </TouchableOpacity>
+          <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+      <Button title="Choisir une photo de profil" onPress={pickImage} />
+      {imageUri && (
+        <Image source={{ uri: imageUri }} style={{ width: 50, height: 50}} />
+      )}
+    </View>
+
 
           <Modal visible={showWeightPicker} transparent animationType="slide">
             <View style={styles.modalView}>
@@ -179,8 +210,8 @@ const styles = StyleSheet.create({
   },
   titre:{
     fontSize:80,
-    marginBottom:50,
-    marginTop:50,
+    marginBottom:20,
+    marginTop:30,
     shadowColor: "#000",
     shadowOffset: {
         width: 0,
