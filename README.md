@@ -1,7 +1,5 @@
 # ActiFit 🏋️‍♂️📱
 
-<img src="assets/images/logo.jpg" alt="Logo de l'App" width="100"/> 
-
 ## Description
 
 **ActiFit** est une application mobile conçue pour aider les utilisateurs à rester en forme en leur fournissant des exercices et des séances d'entraînement. Grâce à une interface utilisateur intuitive, cette application permet de se motiver au quotidien. 💪✨
@@ -35,7 +33,10 @@ Pour installer et exécuter l'application, suivez ces étapes :
 
 ## Aperçu de l'application
 
-## Aperçu de l'application
+### Logo
+<img src="assets/images/logo.jpg" alt="Logo de l'App" width="100"/> 
+
+### Ecran
 
 <div style="display: flex; justify-content: space-around;">
   <img src="GitHubImg/Librairy.png" alt="Bibliothèque d'exercices" width="300"/>
