@@ -21,13 +21,15 @@ Pour installer et exécuter l'application, suivez ces étapes :
    git clone https://github.com/Hugo-Galley/ActiFit.git
    cd ActiFit
    ```
-2.	Installez les dépendances :
-   ```bash
-      npm install
-   ```
-3. Exécutez l’application :
+   
+
+2. Installer les dependances :
       ```bash
-      npm start
+      npm install
+      ```
+3. Lancer l'application :
+   ```bash
+   npm run
    ```
    
 
