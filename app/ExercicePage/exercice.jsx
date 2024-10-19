@@ -43,7 +43,7 @@ const Exercice = () => {
       text: "Jambes",
     },
   ].map((muscle, index) => (
-        <Link key={index} href={`./exo-vol2?text=${encodeURIComponent(muscle.text)}`}>
+        <Link key={index} href={`./exo-vol2?exo1=${encodeURIComponent(muscle.text)}&exo2=${encodeURIComponent(muscle.text)}&exo3=${encodeURIComponent(muscle.text)}`}>
           <MuscleChoice urlImg={muscle.urlImg} text={muscle.text} />
         </Link>
   ))}

@@ -25,15 +25,6 @@ async function initializeDatabase() {
             );
         `);
         await db.runAsync(`
-            CREATE TABLE IF NOT EXISTS Seance (
-                idSeance INTEGER PRIMARY KEY AUTOINCREMENT,
-                urlImgBanniere TEXT,
-                nbrExo INT,
-                description TEXT,
-                nom VARCHAR(200)
-            );
-        `);
-        await db.runAsync(`
             CREATE TABLE IF NOT EXISTS Exercice (
                 idExercice INTEGER PRIMARY KEY AUTOINCREMENT,
                 nom VARCHAR(100),
@@ -45,8 +36,8 @@ async function initializeDatabase() {
             );
         `);
 
-        const result = await db.runAsync('SELECT COUNT(*) as count FROM Exercice');
-        const count = 1111
+        const result = await db.getFirstAsync('SELECT COUNT(*) as count FROM Exercice');
+        const count = result.count;
 
         if (count === 0) {
             await db.execAsync(`
@@ -94,16 +85,7 @@ async function initializeDatabase() {
 ('Soulevé de terre', 'Jambes', 'https://www.dravelnutrition.fr/img/cms/BLOG/exercice-souleve-de-terre.jpg', 'Debout devant une barre, fléchissez les genoux et les hanches pour saisir la barre. Redressez-vous en gardant le dos droit.'),
 ('Mollets debout', 'Jambes', 'https://www.docteur-fitness.com/wp-content/uploads/2021/10/extension-mollets-debout-machine.gif', 'Debout sur le bord d une marche, talons dans le vide, montez sur la pointe des pieds puis redescendez en contrôlant le mouvement.');
             `);
-        } else if (count == 2) {
-            await db.runAsync(`
-                DELETE FROM Exercice;
-            `);
-            await db.runAsync(`
-                INSERT INTO Statistique (taille, poids, frequence, objectif, idUser)
-                VALUES (180, 75, 3, 'Stabiliser son poids', 1);
-            `);
         }
-
     } catch (error) {
         console.error("Erreur lors de l'initialisation de la base de données :", error.message);
     }

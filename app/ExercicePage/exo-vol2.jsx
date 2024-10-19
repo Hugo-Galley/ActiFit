@@ -10,12 +10,15 @@ import * as SQLite from 'expo-sqlite';
 function ChoiceExo() {
   const db = SQLite.openDatabaseSync('app.db'); 
   const [exos, setExos] = useState([]);
-  const { text } = useGlobalSearchParams();
+  const { exo1 } = useGlobalSearchParams();
+  const { exo2 } = useGlobalSearchParams();
+  const { exo3 } = useGlobalSearchParams();
+
 
   useEffect(() => {
     function fetchExos() {
       try {
-        const result = db.getAllSync('SELECT * FROM Exercice WHERE muscleCible = ?', [text]);
+        const result = db.getAllSync('SELECT * FROM Exercice WHERE muscleCible In (?,?,?) ORDER BY Random() LIMIT 6', [exo1,exo2,exo3]);
         setExos(result); 
       } catch (error) {
         console.error('Erreur lors de la récupération des exercices:', error);
@@ -23,7 +26,7 @@ function ChoiceExo() {
     }
 
     fetchExos();
-  }, [text]);
+  }, [exo1]);
 
   return (
     <GestureHandlerRootView>

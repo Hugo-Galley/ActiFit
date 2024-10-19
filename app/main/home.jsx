@@ -1,46 +1,141 @@
 import { View, Text, StyleSheet } from 'react-native'
-import React, { useState } from 'react'
+import React, {useState, useEffect} from 'react'
 import Card from '../../components/Card'
 import HeaderPage from '../../components/Header'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler';
-import { Link, useGlobalSearchParams } from 'expo-router'
+import { Link } from 'expo-router'
+import { useUser } from '../UserContext'
+import * as SQLite from 'expo-sqlite'
 
 function Home(){
+  const { userId } = useUser();
+  const db = SQLite.openDatabaseSync('app.db'); 
+  const [stat, setStat] = useState([]);
+
+  useEffect(() => {
+      function fetchExos() {
+          try {
+              const result = db.getFirstSync('SELECT * FROM Statistique WHERE idUser = ?',userId);
+              setStat(result); 
+          } catch (error) {
+              console.error('Erreur lors de la récupération des Informations:', error);
+          }
+      }
+
+      fetchExos();
+  }, []);
   
-    return (
-        <GestureHandlerRootView >
-            <HeaderPage page={"Accueil"} />
-            <SafeAreaView>
-            <ScrollView>
-              <View style={styles.container}>
-                <Text style={styles.text}>Découvrer vos Séances de la Semaine</Text>
-                <Link href={'./seance'} style={styles.card}>
-                <Card 
-                  urlImg={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJqWCLZanWy09kTejVtnqM_Yumv9Do8KHYrg&s"} 
-                  nbrExo={12} 
-                  text={"Séance PUSH : Pec, Epaule Tritri"} 
+  return (
+    <GestureHandlerRootView>
+      <HeaderPage page={"Accueil"} />
+      <SafeAreaView>
+        <ScrollView>
+          <Text style={styles.text}>Découvrez vos Séances de la Semaine</Text>
+          <View style={styles.container}>
+            {stat.frequence === 1 ? (
+              <Link
+                href={`./seance?nom=${encodeURIComponent('FullBody')}&url=${encodeURIComponent('https://i.ytimg.com/vi/gOViaSi6y38/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDTHg1SkSDAXr2lcA_ZxoBuIdd-Vw')}`}
+                style={styles.card}
+              >
+                <Card
+                  urlImg={"https://i.ytimg.com/vi/gOViaSi6y38/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDTHg1SkSDAXr2lcA_ZxoBuIdd-Vw"}
+                  nbrExo={6}
+                  text={"Séance FullBody : Pec, Dos, Jambes"}
                 />
+              </Link>
+            ) : stat.frequence === 3 ? (
+              <>
+                <Link
+                  href={`./seance?nom=${encodeURIComponent('Push')}&url=${encodeURIComponent('https://img.passeportsante.net/1200x675/2020-11-26/i97824-.webp')}`}
+                  style={styles.card}
+                >
+                  <Card
+                    urlImg={"https://img.passeportsante.net/1200x675/2020-11-26/i97824-.webp"}
+                    nbrExo={6}
+                    text={"Séance PUSH : Pec, Épaules, Triceps"}
+                  />
                 </Link>
-                <Link href={'./seance'} style={styles.card}>
-                <Card 
-                  urlImg={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJqWCLZanWy09kTejVtnqM_Yumv9Do8KHYrg&s"} 
-                  nbrExo={12} 
-                  text={"Séance PUSH : Pec, Epaule Tritri"} 
-                />
+                <Link
+                  href={`./seance?nom=${encodeURIComponent('Pull')}&url=${encodeURIComponent('https://squaregym.fr/app/uploads/2024/06/Aliments-perte-de-poids.jpg')}`}
+                  style={styles.card}
+                >
+                  <Card
+                    urlImg={"https://squaregym.fr/app/uploads/2024/06/Aliments-perte-de-poids.jpg"}
+                    nbrExo={6}
+                    text={"Séance Pull : Dos, Biceps"}
+                  />
                 </Link>
-                <Link href={'./seance'} style={styles.card}>
-                <Card 
-                  urlImg={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJqWCLZanWy09kTejVtnqM_Yumv9Do8KHYrg&s"} 
-                  nbrExo={12} 
-                  text={"Séance PUSH : Pec, Epaule Tritri"} 
-                />
+                <Link
+                  href={`./seance?nom=${encodeURIComponent('Legs')}&url=${encodeURIComponent('https://fitness-life.fr/wp-content/uploads/2019/08/Séance-musculation-jambes.jpg')}`}
+                  style={styles.card}
+                >
+                  <Card
+                    urlImg={"https://fitness-life.fr/wp-content/uploads/2019/08/Séance-musculation-jambes.jpg"}
+                    nbrExo={6}
+                    text={"Séance Jambes : Quadriceps, Ischio-jambiers, Mollets"}
+                  />
                 </Link>
-              </View>
-              </ScrollView>
-            </SafeAreaView>
-        </GestureHandlerRootView>
-      );
+              </>
+            ) : (
+              <>
+                <Link
+                  href={`./seance?nom=${encodeURIComponent('Push')}&url=${encodeURIComponent('https://img.passeportsante.net/1200x675/2020-11-26/i97824-.webp')}`}
+                  style={styles.card}
+                >
+                  <Card
+                    urlImg={"https://img.passeportsante.net/1200x675/2020-11-26/i97824-.webp"}
+                    nbrExo={6}
+                    text={"Séance PUSH : Pec, Épaules, Triceps"}
+                  />
+                </Link>
+                <Link
+                  href={`./seance?nom=${encodeURIComponent('Pull')}&url=${encodeURIComponent('https://squaregym.fr/app/uploads/2024/06/Aliments-perte-de-poids.jpg')}`}
+                  style={styles.card}
+                >
+                  <Card
+                    urlImg={"https://squaregym.fr/app/uploads/2024/06/Aliments-perte-de-poids.jpg"}
+                    nbrExo={6}
+                    text={"Séance Pull : Dos, Biceps"}
+                  />
+                </Link>
+                <Link
+                  href={`./seance?nom=${encodeURIComponent('Legs')}&url=${encodeURIComponent('https://fitness-life.fr/wp-content/uploads/2019/08/Séance-musculation-jambes.jpg')}`}
+                  style={styles.card}
+                >
+                  <Card
+                    urlImg={"https://fitness-life.fr/wp-content/uploads/2019/08/Séance-musculation-jambes.jpg"}
+                    nbrExo={6}
+                    text={"Séance Jambes : Quadriceps, Ischio-jambiers, Mollets"}
+                  />
+                </Link>
+                <Link
+                  href={`./seance?nom=${encodeURIComponent('Push')}&url=${encodeURIComponent('https://img.passeportsante.net/1200x675/2020-11-26/i97824-.webp')}`}
+                  style={styles.card}
+                >
+                  <Card
+                    urlImg={"https://img.passeportsante.net/1200x675/2020-11-26/i97824-.webp"}
+                    nbrExo={6}
+                    text={"Séance PUSH : Pec, Épaules, Triceps"}
+                  />
+                </Link>
+                <Link
+                  href={`./seance?nom=${encodeURIComponent('Pull')}&url=${encodeURIComponent('https://squaregym.fr/app/uploads/2024/06/Aliments-perte-de-poids.jpg')}`}
+                  style={styles.card}
+                >
+                  <Card
+                    urlImg={"https://squaregym.fr/app/uploads/2024/06/Aliments-perte-de-poids.jpg"}
+                    nbrExo={6}
+                    text={"Séance Pull : Dos, Biceps"}
+                  />
+                </Link>
+              </>
+            )}
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </GestureHandlerRootView>
+  );
     };
     
 

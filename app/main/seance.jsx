@@ -3,41 +3,58 @@ import React from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import HeaderPage from '../../components/Header'
 import { Ionicons } from '@expo/vector-icons'
+import { Link, useGlobalSearchParams } from 'expo-router'
 
 function seance(){
-  return (
-<GestureHandlerRootView>
-    <HeaderPage page={"Exercice"}/>
-    <View>
-        <Image source={require('../../assets/essan.webp')} style={styles.image}/>
-            <View style={styles.container} > 
-                <View style={styles.pictoContainer}>
-                    <View style={styles.infoItems}>
-                    <Ionicons name='timer-outline' size={30} color={"#594CE4"}/>
-                        <Text>30 Min</Text>
-                        <Text style={styles.subsubtitle}>Durée</Text>
-                    </View>
-                    <View style={styles.infoItems} >
-                        <Ionicons name='bar-chart-outline' size={30} color={"#594CE4"}/>
-                        <Text>Intermediaire</Text>
-                        <Text style={styles.subsubtitle}>Niveau</Text>
-                    </View>
-                    <View style={styles.infoItems}>
-                        <Ionicons name='flame' size={30} color={"#594CE4"}/>
-                        <Text>348</Text>
-                        <Text style={styles.subsubtitle}>Kcal</Text>
-                    </View>
+    const {nom} = useGlobalSearchParams();
+    const {url} = useGlobalSearchParams();
 
+
+    return (
+        <GestureHandlerRootView>
+          <HeaderPage page={"Exercice"} />
+          <View>
+            <Image source={{ uri: url }} style={styles.image} />
+            <View style={styles.container}>
+              <View style={styles.pictoContainer}>
+                <View style={styles.infoItems}>
+                  <Ionicons name='timer-outline' size={30} color={"#594CE4"} />
+                  <Text>30 Min</Text>
+                  <Text style={styles.subsubtitle}>Durée</Text>
                 </View>
-                <View style={styles.bodySeance}>
-                    <Text style={styles.titre}>Séance Push</Text>
-                    <Text style={styles.subtitle}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia quod quos quibusdam veniam sed. Obcaecati tempore, sint delectus atque ipsum vitae reprehenderit et inventore perferendis autem ad eum, hic consequatur?</Text>
+                <View style={styles.infoItems}>
+                  <Ionicons name='bar-chart-outline' size={30} color={"#594CE4"} />
+                  <Text>Intermédiaire</Text>
+                  <Text style={styles.subsubtitle}>Niveau</Text>
                 </View>
-                <Text style={styles.button}>Demarer l'entrainement</Text>
+                <View style={styles.infoItems}>
+                  <Ionicons name='flame' size={30} color={"#594CE4"} />
+                  <Text>348</Text>
+                  <Text style={styles.subsubtitle}>Kcal</Text>
+                </View>
+              </View>
+              <View style={styles.bodySeance}>
+                <Text style={styles.titre}>Séance {nom}</Text>
+                <Text style={styles.subtitle}>
+                Rejoignez-nous pour une séance de sport revigorante et énergisante ! Ensemble, nous allons repousser nos limites, renforcer notre corps et booster notre énergie. Ne laissez pas le doute vous freiner, venez vous surpasser !
+                </Text>
+              </View>
+              <Link
+                href={
+                  nom === "Push"
+                    ? `../ExercicePage/exo-vol2?exo1=${encodeURIComponent("Pectoraux")}&exo2=${encodeURIComponent("Triceps")}&exo3=${encodeURIComponent("Épaules")}`
+                    : nom === "Pull"
+                    ? `../ExercicePage/exo-vol2?exo1=${encodeURIComponent("Dos")}&exo2=${encodeURIComponent("Biceps")}&exo3=${encodeURIComponent("Avants-bras")}`
+                    : `../ExercicePage/exo-vol2?exo1=${encodeURIComponent("Jambes")}&exo2=${encodeURIComponent("Abdos")}&exo3=${encodeURIComponent("Jambes")}`
+                }
+                style={styles.button}
+              >
+                <Text>Démarrer l'entraînement</Text>
+              </Link>
             </View>
-    </View>
-</GestureHandlerRootView>
-  )
+          </View>
+        </GestureHandlerRootView>
+      );
 }
 
 export default seance
