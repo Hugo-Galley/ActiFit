@@ -1,6 +1,6 @@
 # ActiFit 🏋️‍♂️📱
 
-![Logo de l'App](chemin/vers/ton/image/logo.png) <!-- Remplace par le chemin de ton image -->
+![Logo de l'App](assets/images/logo.jpg) <!-- Remplace par le chemin de ton image -->
 
 ## Description
 
