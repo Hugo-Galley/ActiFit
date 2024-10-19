@@ -1,10 +1,8 @@
 # ActiFit 🏋️‍♂️📱
 
-<<<<<<< HEAD
-<img src="assets/images/logo.jpg" alt="Logo de l'App" width="150"/> <!-- Remplace par le chemin de ton image -->
-=======
 <img src="assets/images/logo.jpg" alt="Logo de l'App" width="150"/> 
->>>>>>> 4d2081295a186bd8f3f1ae6e1648ce9ce3c4dabc
+
+<img src="assets/images/logo.jpg" alt="Logo de l'App" width="150"/> 
 
 ## Description
 
