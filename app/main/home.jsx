@@ -14,7 +14,7 @@ function Home(){
   const [stat, setStat] = useState([]);
 
   useEffect(() => {
-      function fetchExos() {
+      async function fetchExos() {
           try {
               const result = db.getFirstSync('SELECT * FROM Statistique WHERE idUser = ?',userId);
               setStat(result); 
@@ -25,7 +25,6 @@ function Home(){
 
       fetchExos();
   }, []);
-  
   return (
     <GestureHandlerRootView>
       <HeaderPage page={"Accueil"} />

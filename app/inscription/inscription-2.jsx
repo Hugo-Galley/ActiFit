@@ -34,7 +34,9 @@ function inscription2(){
       `, taille, poids, choice, objectif, user.idUser);
   
       setUserId(user.idUser);
-      router.push('main/home');
+      setTimeout(() => {
+        router.push('main/home');
+    }, 1000); 
       
     } catch (error) {
       console.error('Erreur:', error);
