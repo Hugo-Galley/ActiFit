@@ -1,6 +1,6 @@
 # ActiFit 🏋️‍♂️📱
 
-![Logo de l'App](assets/images/logo.jpg) <!-- Remplace par le chemin de ton image -->
+<img src="assets/images/logo.jpg" alt="Logo de l'App" width="150"/> 
 
 ## Description
 
@@ -33,17 +33,14 @@ Pour installer et exécuter l'application, suivez ces étapes :
 
 ## Aperçu de l'application
 
-### Écran d'accueil
+## Aperçu de l'application
 
-![Écran d'accueil](GitHubImg/HomePage.png)
+<div style="display: flex; justify-content: space-around;">
+  <img src="GitHubImg/Librairy.png" alt="Bibliothèque d'exercices" width="300"/>
+     <img src="GitHubImg/HomePage.png" alt="Écran d'accueil" width="300"/>
+  <img src="GitHubImg/profil.png" alt="Profil" width="300"/> 
 
-### Bibliothèque d'exercices
-
-![Bibliothèque d'exercices](GitHubImg/Librairy.png)
-
-### Profil
-
-![Suivi des progrès](GitHubImg/profil.png) 
+</div>
 
 ## Contribuer
 
