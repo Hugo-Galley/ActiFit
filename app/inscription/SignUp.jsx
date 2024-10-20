@@ -3,11 +3,12 @@ import React, { useState } from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import HeaderPage from '../../components/Header'
 import { Picker } from '@react-native-picker/picker';
-import { Link, useRouter } from 'expo-router';
+import {useRouter } from 'expo-router';
 import * as SQLite from 'expo-sqlite/next';
 import * as ImagePicker from 'expo-image-picker';
 
 function SignUp() {
+  // Deefiniton des variables
   const [email, onChangeEmail] = useState('');
   const [mdp, onChangeMdp] = useState('');
   const [nom, onChangeNom] = useState('');
@@ -20,6 +21,7 @@ function SignUp() {
   const [showWeightPicker, setShowWeightPicker] = useState(false);
   const [showHeightPicker, setShowHeightPicker] = useState(false);
 
+  // Remplissage des Tableau avec les differents choix possible
   for (let i = 30; i <= 120; i++) {
     poidsOptions.push(i);
     }
@@ -27,6 +29,7 @@ function SignUp() {
     tailleOptions.push(i);
     }
 
+    // Fonction our enregistrer l'utilisateur 
     function RegisterUser(){
       const db = SQLite.openDatabaseSync('app.db'); 
       db.runSync(`
@@ -35,6 +38,7 @@ function SignUp() {
                 );
         );
     `,nom,imageUri,email,mdp);
+    // Envoie des parametre de poids et de taille vers /inscription-1
     router.push({
       pathname: './inscription-1',
       params: { taille: selectedHeight,
@@ -46,7 +50,8 @@ function SignUp() {
 
     }
 
-    const pickImage = async () => {
+    // Fonction de récuperation de l'image pour la photo de profil
+    async function pickImage(){
       // Demande de permission d'accès à la galerie
       if (Platform.OS !== 'web') {
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -73,6 +78,7 @@ function SignUp() {
       <HeaderPage page={'Inscription'}/>
       <SafeAreaView style={styles.containerPrincip}>
         <Text style={styles.titre}>Inscription</Text>
+        {/* Bloc d'inscription */}
         <View style={styles.container}>
           <TextInput
             placeholder='Votre email'
@@ -108,7 +114,7 @@ function SignUp() {
       )}
     </View>
 
-
+          {/* Mise en place des Modals (petite fenetre pop-in) pour le choix de la taille et du poids */}
           <Modal visible={showWeightPicker} transparent animationType="slide">
             <View style={styles.modalView}>
               <Picker
@@ -152,7 +158,7 @@ function SignUp() {
     </GestureHandlerRootView>
   )
 }
-
+// Style CSS de la fonction
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',

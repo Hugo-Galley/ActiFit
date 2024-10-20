@@ -8,6 +8,7 @@ import { Link, useGlobalSearchParams } from 'expo-router';
 import * as SQLite from 'expo-sqlite';
 
 function ChoiceExo() {
+  // Declaration des variables et recuperation des parametres
   const db = SQLite.openDatabaseSync('app.db'); 
   const [exos, setExos] = useState([]);
   const { exo1 } = useGlobalSearchParams();
@@ -15,6 +16,7 @@ function ChoiceExo() {
   const { exo3 } = useGlobalSearchParams();
 
 
+  // Fonction de recuperation des Exercice en fonction des muscles demandé
   useEffect(() => {
     function fetchExos() {
       try {
@@ -33,6 +35,7 @@ function ChoiceExo() {
               <HeaderPage page={"Exercices"} />
       <SafeAreaView>
         <ScrollView>
+          {/* Affichage des Exercices sellectionné */}
           <View style={styles.container}>
             {exos.map((exo, index) => (
               <Link href={`./exo-vol3?id=${encodeURIComponent(exo.idExercice)}`} style={styles.gridItem} key={index}>
@@ -48,6 +51,7 @@ function ChoiceExo() {
 
 export default ChoiceExo;
 
+// Style CSS de la fonction
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',

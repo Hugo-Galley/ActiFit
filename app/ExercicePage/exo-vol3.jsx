@@ -7,10 +7,12 @@ import * as SQLite from 'expo-sqlite';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 function DescriptionExo() {
+  // Déclaration des variables et récuperation des parametres
   const db = SQLite.openDatabaseSync('app.db');
   const [exo, setExo] = useState(null);
   const { id } = useGlobalSearchParams();
 
+  // Fonction de récuperation des Exercices en fonction de son identifiant
   useEffect(() => {
     function fetchExo() {
       try {
@@ -30,6 +32,7 @@ function DescriptionExo() {
             <HeaderPage page={"Exercices"} />
     <SafeAreaView>
       <View>
+        {/* Affichage d'un écran de chargement si l'exercice ne marche pas */}
         {exo ? (
           <Exo
             nom={exo.nom}

@@ -9,12 +9,14 @@ import { useUser } from '../UserContext'
 import * as SQLite from 'expo-sqlite'
 
 function Home(){
+  // Definition des variables
   const { userId } = useUser();
   const db = SQLite.openDatabaseSync('app.db'); 
   const [stat, setStat] = useState([]);
 
+  // Fonction de recuperation des Statistque lié a l'utilisateur
   useEffect(() => {
-      async function fetchExos() {
+      async function fetchStat() {
           try {
               const result = db.getFirstSync('SELECT * FROM Statistique WHERE idUser = ?',userId);
               setStat(result); 
@@ -23,7 +25,7 @@ function Home(){
           }
       }
 
-      fetchExos();
+      fetchStat();
   }, []);
   return (
     <GestureHandlerRootView>
@@ -32,6 +34,7 @@ function Home(){
         <ScrollView>
           <Text style={styles.text}>Découvrez vos Séances de la Semaine</Text>
           <View style={styles.container}>
+            {/* Verification de la frequence d'abonnement afin d'afficher le bon nombre de séance */}
             {stat.frequence === 1 ? (
               <Link
                 href={`./seance?nom=${encodeURIComponent('FullBody')}&url=${encodeURIComponent('https://i.ytimg.com/vi/gOViaSi6y38/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDTHg1SkSDAXr2lcA_ZxoBuIdd-Vw')}`}
@@ -140,6 +143,7 @@ function Home(){
 
 export default Home
 
+// Style CSS de la fonction
 const styles = StyleSheet.create({
   container: {
     display: 'flex',

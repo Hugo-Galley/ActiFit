@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Image } from 'react-native'
+import { StyleSheet, View} from 'react-native'
 import React from 'react'
 import HeaderPage from '../../components/Header'
 import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler'
@@ -7,13 +7,8 @@ import MuscleChoice from '../../components/MuscleChoice'
 import { Link } from 'expo-router'
 
 const Exercice = () => {
-  return (
-    <GestureHandlerRootView>
-              <HeaderPage page={"Exercices"} />
-      <SafeAreaView>
-        <ScrollView>
-        <View style={styles.containerexo}>
-  {[
+  // Declaration du tableau des Exercice proposé
+  let data = [
     {
       urlImg: "https://coach-rameur.com/wp-content/uploads/2022/06/pectoraux-illustration-v2.png",
       text: "Pectoraux",
@@ -42,7 +37,15 @@ const Exercice = () => {
       urlImg: "https://static.wixstatic.com/media/23ac3b_1855a057e8bb49d0907fada55e43778a~mv2.png/v1/fill/w_428,h_413,al_c,lg_1,q_85/23ac3b_1855a057e8bb49d0907fada55e43778a~mv2.png",
       text: "Jambes",
     },
-  ].map((muscle, index) => (
+  ]
+  return (
+    <GestureHandlerRootView>
+              <HeaderPage page={"Exercices"} />
+      <SafeAreaView>
+        <ScrollView>
+        {/* Affichage des differents muscle possible */}
+        <View style={styles.containerexo}>
+  {data.map((muscle, index) => (
         <Link key={index} href={`./exo-vol2?exo1=${encodeURIComponent(muscle.text)}&exo2=${encodeURIComponent(muscle.text)}&exo3=${encodeURIComponent(muscle.text)}`}>
           <MuscleChoice urlImg={muscle.urlImg} text={muscle.text} />
         </Link>
@@ -54,6 +57,7 @@ const Exercice = () => {
   )
 }
 
+// Style CSS de la fonction
 const styles = StyleSheet.create({
   containerexo: {
     padding: 5,

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
 
+// Card de choix d'un muslce a travailler
 export default function MuscleChoice({ urlImg, text }) {
     return (
       <View style={styles.container}>

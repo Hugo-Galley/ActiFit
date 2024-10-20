@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, SafeAreaView } from "react-native";
+import { View, Text, StyleSheet} from "react-native";
 
 
 // Fonction Header de l'application
@@ -7,7 +7,6 @@ export default function HeaderPage({ page }) {
   return (
 
     <View style={styles.container}>
-
       <Text style={styles.text}>{page}</Text>
     </View>
 

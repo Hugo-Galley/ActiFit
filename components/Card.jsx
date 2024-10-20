@@ -13,7 +13,7 @@ export default function Card({ urlImg, nbrExo, text }) {
     </View>
   );
 }
-
+// Style CSS de la fonction
 const styles = StyleSheet.create({
   container: {
     width: '100%', 

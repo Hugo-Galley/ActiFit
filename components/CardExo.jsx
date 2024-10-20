@@ -1,5 +1,7 @@
 import React from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
+
+// Card utilisé pour affiché un exercice lors d'une séance ou d'un choix
 export default function CardExo({ nomExo, urlImg }) {
     return (
         <View style={styles.container}>

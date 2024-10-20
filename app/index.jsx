@@ -8,13 +8,15 @@ import * as SQLite from 'expo-sqlite';
 import { useUser } from './UserContext';
 initializeDatabase()
 function SignIn (){
+    // Decllaration des variables 
     const [email,onChangeEmail] = useState('');
     const [mdp,onChangeMdp] = useState('');
-    const { setUserId } = useUser();
-    const router = useRouter(); // Utilisation du hook `useRouter`
-    const db = SQLite.openDatabaseSync('app.db'); 
     const [user, setUser] = useState([]);
+    const { setUserId } = useUser();
+    const router = useRouter(); 
+    const db = SQLite.openDatabaseSync('app.db'); 
   
+    // Fonction pour recuperer les informations sur un utilisateurs  
     useEffect(() => {
       function fetchUser() {
         try {
@@ -28,19 +30,21 @@ function SignIn (){
       fetchUser();
     }, []);
 
+    // Fonction pour verifier qu'un utilisaqteur existe ou non
     function verifyConnection() {
-
-    
         let isFound = false;
-    
+        
+        // On verifie si l'email et le mot de passe son correct puis on relance vers Home
         user.forEach((users) => {
             if (users.email === email && users.mdp === mdp) {
                 setUserId(users.idUser)
-                router.push('/main/home');
+                // Delay pour que la BDD est le temps de s'actualiser
+                setTimeout(() => {
+                    router.push('main/home');
+                }, 1000); 
                 isFound = true;
             }
         });
-    
         if (!isFound) {
             alert('Email ou mot de passe incorrect');
         }
@@ -52,6 +56,7 @@ function SignIn (){
         <HeaderPage page={"Connexion"}/>
     <SafeAreaView style={styles.container}>
         <Text style={styles.titre}>Actifit</Text>
+        {/* Bloc de Connexion */}
         <View>
         <TextInput  
       placeholder='Votre email'
@@ -73,6 +78,7 @@ function SignIn (){
                 <Text style={styles.btnText}>Se Connecter</Text>
             </View>
             </TouchableOpacity>
+        {/* Bloc d'Inscription */}
         <Text style={styles.subtitle}>Pas de compte ?</Text>
         <Link href={'/inscription/SignUp'}>
             <View style={styles.button}>
@@ -88,6 +94,7 @@ function SignIn (){
 
 export default SignIn
 
+// Style CSS de la fonction
 const styles = StyleSheet.create({
     container:{
         alignItems:'center',

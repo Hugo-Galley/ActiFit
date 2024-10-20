@@ -1,5 +1,6 @@
 import { openDatabaseAsync } from 'expo-sqlite/next';
 
+// Initialisations de la Base de données
 async function initializeDatabase() {
     try {
         const db = await openDatabaseAsync('app.db');
@@ -35,7 +36,8 @@ async function initializeDatabase() {
                 FOREIGN KEY (idSeance) REFERENCES Seance(idSeance)
             );
         `);
-
+        
+        // Verification si des Inserts existes deja pour la table exercice
         const result = await db.getFirstAsync('SELECT COUNT(*) as count FROM Exercice');
         const count = result.count;
 
@@ -79,7 +81,7 @@ async function initializeDatabase() {
 ('Mountain climbers', 'Abdos', 'https://i0.wp.com/muscu-street-et-crossfit.fr/wp-content/uploads/2022/06/Muscles-Mountain-Climber.002.jpeg?resize=1024%2C576&ssl=1', 'En position de planche, ramenez alternativement chaque genou vers la poitrine dans un mouvement rapide et continu.'),
 ('Planche latérale', 'Abdos', 'https://www.docteur-fitness.com/wp-content/uploads/2022/01/planche-laterale-exercice-abdos-obliques.jpg', 'En appui sur un avant-bras, corps aligné, soulevez vos hanches du sol et maintenez la position.'),
 ('Squat', 'Jambes', 'https://julienquaglierini.com/wp-content/uploads/2018/06/squat.jpg', 'Debout, pieds écartés, descendez comme pour vous asseoir en poussant les fesses en arrière. Remontez en poussant sur vos talons.'),
-('Fentes', 'Jambes', 'https://musculation-nutrition.fr/wp-content/uploads/2021/02/fentes-avant-altères.png', 'Faites un grand pas en avant, fléchissez les deux genoux jusqu à ce que la jambe arrière soit proche du sol. Alternez les jambes.'),
+('Fentes', 'Jambes', 'https://muscu-street-et-crossfit.fr/wp-content/uploads/2023/05/Muscles-Squats-Bulgares.001.jpeg', 'Faites un grand pas en avant, fléchissez les deux genoux jusqu à ce que la jambe arrière soit proche du sol. Alternez les jambes.'),
 ('Presse à cuisses', 'Jambes', 'https://www.docteur-fitness.com/wp-content/uploads/2022/08/presse-a-cuisses-inclinee.gif', 'Assis sur la machine, poussez la plateforme avec vos pieds jusqu à l extension presque complète des jambes, puis revenez.'),
 ('Leg curl', 'Jambes', 'https://www.body-burn.com/wp-content/uploads/2023/08/leg-curl-allonge-cuisses-ischios-exercice.webp', 'Allongé sur la machine, fléchissez les jambes pour amener vos talons vers vos fesses, puis étendez lentement.'),
 ('Soulevé de terre', 'Jambes', 'https://www.dravelnutrition.fr/img/cms/BLOG/exercice-souleve-de-terre.jpg', 'Debout devant une barre, fléchissez les genoux et les hanches pour saisir la barre. Redressez-vous en gardant le dos droit.'),

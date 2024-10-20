@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, SafeAreaView, Image, StyleSheet } from 'react-native'
+import { View, Text,Image, StyleSheet } from 'react-native'
 import React from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import HeaderPage from '../../components/Header'
@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { Link, useGlobalSearchParams } from 'expo-router'
 
 function seance(){
+  // Definiton des Constante qui sont les parametre envoyé depuis /home
     const {nom} = useGlobalSearchParams();
     const {url} = useGlobalSearchParams();
 
@@ -40,6 +41,7 @@ function seance(){
                 </Text>
               </View>
               <Link
+              // Verification du nom de la séance pour ajuster les parametres en consequence
                 href={
                   nom === "Push"
                     ? `../ExercicePage/exo-vol2?exo1=${encodeURIComponent("Pectoraux")}&exo2=${encodeURIComponent("Triceps")}&exo3=${encodeURIComponent("Épaules")}`

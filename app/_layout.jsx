@@ -7,7 +7,9 @@ import { UserProvider } from './UserContext'
 
 const _layout = () => {
   return (
+    // Entourer la Tab du userContext
     <UserProvider>
+        {/* Definition de la Tab Principal */}
     <Tabs initialRouteName='index'
     screenOptions={
         {

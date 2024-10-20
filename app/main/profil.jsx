@@ -8,14 +8,16 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useUser } from '../UserContext';
 
 function Profil() {
+    // Declaration des variables
     const { userId } = useUser();
     const db = SQLite.openDatabaseSync('app.db'); 
     const [stat, setStat] = useState([]);
     const [user, setUser] = useState([]);
-    // const id = 2;
+    let data = [];
 
+    // Fonction de recuperation de l'utilisateurs et des statistiques lié a celui-ci
     useEffect(() => {
-        function fetchExos() {
+        function fetchUser() {
             try {
                 const result = db.getAllSync('SELECT * FROM Statistique WHERE idUser = ?',userId);
                 const resultUser = db.getAllSync('SELECT * FROM User WHERE idUser = ?',userId);
@@ -26,15 +28,14 @@ function Profil() {
             }
         }
 
-        fetchExos();
+        fetchUser();
     }, []);
 
     // Récupération des données à partir des résultats de SQL
     const listStat = stat.length > 0 ? [stat[0].poids, stat[0].objectif, stat[0].taille, stat[0].frequence] : [];
     const listUser = user.length > 0 && user[0].urlImgProfil ? [user[0].nom, user[0].urlImgProfil] : ["Utilisateur", null];
 
-
-    let data = [];
+    // Mise en place des données du graphique en fonction de l'objectif de l'utilisateur
     if (listStat[0] && !isNaN(listStat[0])) {
         if (listStat[1] === "Perdre du poids") {
             data = [listStat[0], listStat[0] - 2, listStat[0] - 4, listStat[0] - 6, listStat[0] - 9, listStat[0] - 12, listStat[0] - 13, listStat[0] - 15];
@@ -80,6 +81,7 @@ function Profil() {
 
                 <View style={styles.graphique}>
                     <Text style={styles.titre}>Prévisions de votre évolution</Text>
+                    {/* Composant du graphique */}
                     <LineChart
                         data={{
                             labels: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin"],
@@ -119,6 +121,7 @@ function Profil() {
 
 export default Profil;
 
+// Style CSS de la fonction
 const styles = StyleSheet.create({
     container: {
         margin: 10,

@@ -3,15 +3,17 @@ import React from 'react'
 import Choice from '../../components/Choice'
 import HeaderPage from '../../components/Header'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import { Link, useGlobalSearchParams, useRouter } from 'expo-router'
+import {useGlobalSearchParams, useRouter } from 'expo-router'
 
 function inscription1(){
+  // Recuperation des parametres
   const { taille } = useGlobalSearchParams();
   const { poids } = useGlobalSearchParams();
   const { email } = useGlobalSearchParams();
   const router = useRouter();
 
   function SendStat(choice){
+    // Envoie des parametre de taille, poids, objectif et email vers la page /inscritpion-2
     router.push({
       pathname: './inscription-2',
       params: { taille: taille,
@@ -47,6 +49,7 @@ function inscription1(){
 
 export default inscription1
 
+// Style CSS de la fonction
 const styles = StyleSheet.create(
   {
     container:{

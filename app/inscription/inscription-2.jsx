@@ -1,20 +1,23 @@
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Choice from '../../components/Choice'
 import HeaderPage from '../../components/Header'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import { Link, useRouter, useGlobalSearchParams } from 'expo-router'
+import {useRouter, useGlobalSearchParams } from 'expo-router'
 import * as SQLite from 'expo-sqlite/next';
 import { useUser } from '../UserContext'
 
 function inscription2(){
+  // Declaration des variables
   const router = useRouter();
   const { setUserId } = useUser();
+  // Recuperation des parametre envoyé depuis /inscritpion-1
   const {poids} = useGlobalSearchParams();
   const {taille} = useGlobalSearchParams();
   const {objectif} = useGlobalSearchParams();
   const {email} = useGlobalSearchParams();
 
+  // Fonction d'enregistrement des statistiques lier a l'user crée precement reocnnu garce a son email 
    function RegisterStat(choice) {
     const db = SQLite.openDatabaseSync("app.db");
     
@@ -34,6 +37,7 @@ function inscription2(){
       `, taille, poids, choice, objectif, user.idUser);
   
       setUserId(user.idUser);
+      // Delay pour que la BDD est le temps de se mettre a jour
       setTimeout(() => {
         router.push('main/home');
     }, 1000); 
@@ -67,6 +71,7 @@ function inscription2(){
 
 export default inscription2
 
+// Style CSS de la fonction
 const styles = StyleSheet.create(
   {
     container:{
