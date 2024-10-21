@@ -47,6 +47,8 @@ function seance(){
                     ? `../ExercicePage/exo-vol2?exo1=${encodeURIComponent("Pectoraux")}&exo2=${encodeURIComponent("Triceps")}&exo3=${encodeURIComponent("Épaules")}`
                     : nom === "Pull"
                     ? `../ExercicePage/exo-vol2?exo1=${encodeURIComponent("Dos")}&exo2=${encodeURIComponent("Biceps")}&exo3=${encodeURIComponent("Avants-bras")}`
+                    : nom === "FullBody"
+                    ? `../ExercicePage/exo-vol2?exo1=${encodeURIComponent("Dos")}&exo2=${encodeURIComponent("Pectoraux")}&exo3=${encodeURIComponent("Biceps")}`
                     : `../ExercicePage/exo-vol2?exo1=${encodeURIComponent("Jambes")}&exo2=${encodeURIComponent("Abdos")}&exo3=${encodeURIComponent("Jambes")}`
                 }
                 style={styles.button}

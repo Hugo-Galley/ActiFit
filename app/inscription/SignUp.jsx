@@ -32,21 +32,26 @@ function SignUp() {
     // Fonction our enregistrer l'utilisateur 
     function RegisterUser(){
       const db = SQLite.openDatabaseSync('app.db'); 
-      db.runSync(`
-        INSERT INTO User (nom, urlImgProfil, email, mdp)
-                VALUES (?, ?, ?, ?);
-                );
-        );
-    `,nom,imageUri,email,mdp);
-    // Envoie des parametre de poids et de taille vers /inscription-1
-    router.push({
-      pathname: './inscription-1',
-      params: { taille: selectedHeight,
-                poids: selectedWeight,
-                email:email
-              }, 
-  });
-
+      if (nom && imageUri && email && mdp)
+      {
+        db.runSync(`
+          INSERT INTO User (nom, urlImgProfil, email, mdp)
+                  VALUES (?, ?, ?, ?);
+                  );
+          );
+      `,nom,imageUri,email,mdp);
+      // Envoie des parametre de poids et de taille vers /inscription-1
+      router.push({
+        pathname: './inscription-1',
+        params: { taille: selectedHeight,
+                  poids: selectedWeight,
+                  email:email
+                }, 
+    });
+      }
+      else{
+        alert("Veuillez remplir tout les champs");
+      }
 
     }
 

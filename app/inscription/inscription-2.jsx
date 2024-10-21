@@ -29,7 +29,6 @@ function inscription2(){
         console.error('Utilisateur non trouvé');
         return;
       }
-  
       // Insérer les statistiques avec l'idUser récupéré
        db.runAsync(`
         INSERT INTO Statistique (taille, poids, frequence, objectif, idUser)
